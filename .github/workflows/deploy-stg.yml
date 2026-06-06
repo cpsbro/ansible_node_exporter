@@ -1,0 +1,23 @@
+name: Deploy STG
+
+on:
+  push:
+    branches:
+      - stg
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    environment: staging
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Run Ansible
+        run: |
+          ansible-playbook \
+            -i inventories/stg/hosts.yml \
+            site.yml

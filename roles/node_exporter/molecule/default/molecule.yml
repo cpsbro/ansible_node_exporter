@@ -1,0 +1,20 @@
+driver:
+  name: docker
+
+platforms:
+  - name: ubuntu2204
+    image: geerlingguy/docker-ubuntu2204-ansible
+
+provisioner:
+  name: ansible
+
+  playbooks:
+    prepare: prepare.yml
+
+verifier:
+  name: ansible
+
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml

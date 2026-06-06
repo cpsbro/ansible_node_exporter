@@ -1,0 +1,30 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - stg
+      - prod
+
+jobs:
+  validate:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Install
+        run: |
+          pip install ansible ansible-lint molecule molecule-docker docker
+
+      - name: Lint
+        run: ansible-lint .
+
+      - name: Molecule
+        run: |
+          cd roles/node_exporter
+          molecule test

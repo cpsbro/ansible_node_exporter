@@ -1,0 +1,15 @@
+galaxy_info:
+  role_name: node_exporter
+  namespace: cpsbro   # OR your org name
+  author: cpsbro
+  description: Prometheus Node Exporter installation role for Ubuntu
+  license: MIT
+  min_ansible_version: "2.14"
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+        - focal
+
+dependencies: []

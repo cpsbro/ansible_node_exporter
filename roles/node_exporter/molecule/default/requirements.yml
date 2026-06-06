@@ -1,0 +1,4 @@
+---
+roles:
+  - name: node_exporter
+    path: ../../..

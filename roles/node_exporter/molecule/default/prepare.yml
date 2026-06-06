@@ -1,0 +1,13 @@
+---
+- name: Prepare
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install dependencies
+      apt:
+        name:
+          - tar
+          - gzip
+          - curl
+        update_cache: yes

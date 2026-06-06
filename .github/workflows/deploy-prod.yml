@@ -1,0 +1,23 @@
+name: Deploy PROD
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    environment: production
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Run Ansible
+        run: |
+          ansible-playbook \
+            -i inventories/prod/hosts.yml \
+            site.yml

@@ -1,0 +1,39 @@
+---
+- name: Verify Node Exporter installation
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Check node_exporter binary exists
+      stat:
+        path: /usr/local/bin/node_exporter
+      register: bin_check
+
+    - name: Assert binary exists
+      assert:
+        that:
+          - bin_check.stat.exists
+        fail_msg: "node_exporter binary is missing"
+
+    - name: Check systemd service file exists
+      stat:
+        path: /etc/systemd/system/node_exporter.service
+      register: svc_file
+
+    - name: Assert service file exists
+      assert:
+        that:
+          - svc_file.stat.exists
+        fail_msg: "systemd service file missing"
+
+    - name: Check service is running
+      command: systemctl is-active node_exporter
+      register: svc_status
+      changed_when: false
+
+    - name: Assert service running
+      assert:
+        that:
+          - svc_status.stdout == "active"
+        fail_msg: "node_exporter service is not running"

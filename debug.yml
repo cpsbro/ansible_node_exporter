@@ -1,0 +1,8 @@
+# debug.yml
+- name: Debug variables
+  hosts: node_exporters
+  gather_facts: false
+
+  tasks:
+    - debug:
+        var: node_exporter_user
